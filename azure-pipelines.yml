@@ -1,39 +1,54 @@
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- task: Maven@4
-  inputs:
-    mavenPomFile: 'pom.xml'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    javaHomeOption: 'JDKVersion'
-    mavenVersionOption: 'Default'
-    mavenAuthenticateFeed: false
-    effectivePomSkip: false
-    sonarQubeRunAnalysis: false
+stages:
+- stage : SAST
+  jobs:
+  - job: Job
+    displayName: 'sdasds'
+    steps:
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml'
+        publishJUnitResults: true
+        testResultsFiles: '**/surefire-reports/TEST-*.xml'
+        javaHomeOption: 'JDKVersion'
+        mavenVersionOption: 'Default'
+        mavenAuthenticateFeed: false
+        effectivePomSkip: false
+        sonarQubeRunAnalysis: false
 
-- task: SonarCloudPrepare@1
-  inputs:
-    SonarCloud: 'sonarcloud'
-    organization: 'devsecops-usach-laboratorio-final'
-    projectKey: 'DevSecOps-USACH-Laboratorio-Final_spring-boot-kubernetes'
-    projectName: 'spring-boot-kubernetes'
-    
-- task: Maven@4
-  inputs:
-    mavenPomFile: 'pom.xml'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    javaHomeOption: 'JDKVersion'
-    mavenVersionOption: 'Default'
-    mavenAuthenticateFeed: false
-    effectivePomSkip: false
-    sonarQubeRunAnalysis: true
-    sqMavenPluginVersionChoice: 'latest'
+    - task: SonarCloudPrepare@1
+      inputs:
+        SonarCloud: 'sonarcloud'
+        organization: 'devsecops-usach-laboratorio-final'
+        projectKey: 'DevSecOps-USACH-Laboratorio-Final_spring-boot-kubernetes'
+        projectName: 'spring-boot-kubernetes'
+        
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml'
+        publishJUnitResults: true
+        testResultsFiles: '**/surefire-reports/TEST-*.xml'
+        javaHomeOption: 'JDKVersion'
+        mavenVersionOption: 'Default'
+        mavenAuthenticateFeed: false
+        effectivePomSkip: false
+        sonarQubeRunAnalysis: true
+        sqMavenPluginVersionChoice: 'latest'
 
-- task: dependency-check-build-task@6
-  inputs:
-    projectName: 'spring-boot-kubernetes'
-    scanPath: '$(Build.SourcesDirectory)/target'
-    format: 'HTML'
+    - task: sonarcloud-buildbreaker@2
+      inputs:
+        SonarCloud: 'sonarcloud'
+        organization: 'devsecops-usach-laboratorio-final'
+
+- stage : SCA
+  jobs:
+  - job: Job
+    displayName: 'asdsddfh'
+    steps:
+    - task: dependency-check-build-task@6
+      inputs:
+        projectName: 'spring-boot-kubernetes'
+        scanPath: '$(Build.SourcesDirectory)/target'
+        format: 'HTML'
