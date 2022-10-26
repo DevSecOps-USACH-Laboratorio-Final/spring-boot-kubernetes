@@ -20,7 +20,15 @@ steps:
     projectKey: 'devsecops-usach-laboratorio-final'
     projectName: 'spring-boot-kubernetes'
     
-- task: MavenAuthenticate@0
+- task: Maven@4
   inputs:
-    artifactsFeeds: 'adolfohernandeztapia'
+    mavenPomFile: 'pom.xml'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    javaHomeOption: 'JDKVersion'
+    mavenVersionOption: 'Default'
+    mavenAuthenticateFeed: false
+    effectivePomSkip: false
+    sonarQubeRunAnalysis: true
+    sqMavenPluginVersionChoice: 'latest'
 
