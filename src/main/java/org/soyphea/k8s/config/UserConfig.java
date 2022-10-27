@@ -13,8 +13,12 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 
 public class UserConfig {
-    ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("tcp://localhost:61616");
-    factory.setTrustAllPackages(true); // Noncompliant
     String name;
     String blog;
+}
+
+protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+  String json = "{\"key\":\""+req.getParameter("value")+"\"}";
+  FileOutputStream fos = new FileOutputStream("output.json");
+  fos.write(json.getBytes(Charset.forName("UTF-8")));  // Noncompliant
 }
