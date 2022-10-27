@@ -7,8 +7,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.Cipher;
-import javax.crypto.spec.SecretKeySpec;
-
 
 @ConfigurationProperties(prefix = "user")
 @Component
@@ -25,7 +23,7 @@ public class UserConfig {
     
     try
         {
-            Cipher c1 = Cipher.getInstance("DES/ECB/PKCS5Padding"); // Noncompliant: DES works with 56-bit keys allow attacks via exhaustive search
+            Cipher c1 = Cipher.getInstance("DES/ECB/PKCS5Padding"); // vulnerability
         }   
     catch(Exception e)
         {
