@@ -13,9 +13,10 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 
 public class UserConfig {
-    byte[] salt = "notrandom".getBytes();
-    PBEParameterSpec cipherSpec = new PBEParameterSpec(salt, 10000); // Noncompliant, predictable salt
-    PBEKeySpec spec = new PBEKeySpec(chars, salt, 10000, 256); // Noncompliant, predictable salt
+    GET /pageSomeWhere HTTP/1.1
+    Host: webSite.com
+    User-Agent: Mozilla/5.0
+    Cookie: JSESSIONID=Hacked_Session_Value'''">
     
     String name;
     String blog;
