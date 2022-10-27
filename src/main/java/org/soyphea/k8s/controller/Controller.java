@@ -17,6 +17,7 @@ import java.util.List;
 @RestController
 public class Controller {
     public String password = "123456";
+    factory.setXIncludeAware(true);
     @Autowired
     private UserConfig userConfig;
 
