@@ -87,12 +87,12 @@ stages:
 
     - task: Docker@2
       inputs:
-        containerRegistry: 'DockerConn'
+        containerRegistry: 'docker'
         command: 'login'
 
     - task: Docker@2
       inputs:
-        containerRegistry: 'DockerConn'
+        containerRegistry: 'docker'
         command: 'build'
         repository: 'adolfohernandeztapia/spring-boot-kubernetes'
         Dockerfile: '**/Dockerfile'
@@ -106,7 +106,7 @@ stages:
       displayName: Image Scan
     - task: Docker@2
       inputs:
-        containerRegistry: 'DockerConn'
+        containerRegistry: 'docker'
         repository: 'adolfohernandeztapia/spring-boot-kubernetes'
         command: 'push'
         tags: 'latest'
