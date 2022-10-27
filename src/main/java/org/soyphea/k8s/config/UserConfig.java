@@ -8,6 +8,11 @@ import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
+
+Connection conn = null;
+
+conn = DriverManager.getConnection("jdbc:mysql://localhost/test?" + "user=minty&password=greatsqldb");
 
 @ConfigurationProperties(prefix = "user")
 @Component
@@ -16,7 +21,6 @@ import java.sql.DriverManager;
 @NoArgsConstructor
 
 public class UserConfig {
-    Connection conn = DriverManager.getConnection("jdbc:derby:memory:myDB;create=true", "login", "");
     String name;
     String blog;
 }
