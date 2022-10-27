@@ -13,10 +13,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import javax.crypto.Cipher;
+
 @Slf4j
 @RestController
 public class Controller {
-    public String password = "123456";
+    
+    try
+    {
+        Cipher c1 = Cipher.getInstance("DES"); // Noncompliant: DES works with 56-bit keys allow attacks via exhaustive search
+    }
+    catch(Exception e)
+    {
+    }
+
     @Autowired
     private UserConfig userConfig;
 
