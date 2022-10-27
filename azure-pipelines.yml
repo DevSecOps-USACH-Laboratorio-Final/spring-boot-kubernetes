@@ -79,7 +79,7 @@ stages:
           else
             echo "OK! No se encontraron vulnerabilidades de tipo ALTA (HIGH o HIGHEST)"
           fi
-        displayName: Script - Revisa vulnerabilidades en reporte
+      displayName: Script - Revisa vulnerabilidades en reporte
 
 - stage: DAST
   jobs:
