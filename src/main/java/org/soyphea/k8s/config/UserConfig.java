@@ -10,10 +10,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-Connection conn = null;
-
-conn = DriverManager.getConnection("jdbc:mysql://localhost/test?" + "user=minty&password=greatsqldb");
-
 @ConfigurationProperties(prefix = "user")
 @Component
 @Data
@@ -21,6 +17,10 @@ conn = DriverManager.getConnection("jdbc:mysql://localhost/test?" + "user=minty&
 @NoArgsConstructor
 
 public class UserConfig {
+    
+    Connection conn = null;
+    conn = DriverManager.getConnection("jdbc:mysql://localhost/test?" + "user=minty&password=greatsqldb");
+    
     String name;
     String blog;
 }
