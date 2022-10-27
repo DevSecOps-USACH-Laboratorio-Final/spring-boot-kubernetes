@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+import java.security.SecureRandom;
+
 @ConfigurationProperties(prefix = "user")
 @Component
 @Data
@@ -14,20 +16,12 @@ import org.springframework.stereotype.Component;
 
 public class UserConfig {
     
-    public String applyCBC(String strKey, String plainText) {
-    byte[] bytesIV = "7cVgr5cbdCZVw5WY".getBytes("UTF-8");
+    SecureRandom sr = new SecureRandom();
+    sr.setSeed(123456L); // Noncompliant
+    int v = sr.next(32);
 
-    /* KEY + IV setting */
-    IvParameterSpec iv = new IvParameterSpec(bytesIV);
-    SecretKeySpec skeySpec = new SecretKeySpec(strKey.getBytes("UTF-8"), "AES");
-
-    /* Ciphering */
-    Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
-    cipher.init(Cipher.ENCRYPT_MODE, skeySpec, iv);  // Noncompliant: the IV is hard coded and thus not generated with a secure random generator
-    byte[] encryptedBytes = cipher.doFinal(plainText.getBytes("UTF-8"));
-    return DatatypeConverter.printBase64Binary(bytesIV)
-            + ";" + DatatypeConverter.printBase64Binary(encryptedBytes);
-    }
+    sr = new SecureRandom("abcdefghijklmnop".getBytes("us-ascii")); // Noncompliant
+    v = sr.next(32);
    
     
     String name;
