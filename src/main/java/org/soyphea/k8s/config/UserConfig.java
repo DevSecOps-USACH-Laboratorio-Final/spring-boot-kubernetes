@@ -13,10 +13,11 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 
 public class UserConfig {
-    GET /pageSomeWhere HTTP/1.1
-    Host: webSite.com
-    User-Agent: Mozilla/5.0
-    Cookie: JSESSIONID=Hacked_Session_Value'''">
+    
+    if(isActiveSession(request.getRequestedSessionId()) ){
+        String name;
+    }
+   
     
     String name;
     String blog;
