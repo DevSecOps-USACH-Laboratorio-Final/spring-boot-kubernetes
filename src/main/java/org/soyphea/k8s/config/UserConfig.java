@@ -13,12 +13,10 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 
 public class UserConfig {
+    byte[] salt = "notrandom".getBytes();
+    PBEParameterSpec cipherSpec = new PBEParameterSpec(salt, 10000); // Noncompliant, predictable salt
+    PBEKeySpec spec = new PBEKeySpec(chars, salt, 10000, 256); // Noncompliant, predictable salt
+    
     String name;
     String blog;
-}
-
-protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-  String json = "{\"key\":\""+req.getParameter("value")+"\"}";
-  FileOutputStream fos = new FileOutputStream("output.json");
-  fos.write(json.getBytes(Charset.forName("UTF-8")));  // Noncompliant
 }
