@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 
 public class UserConfig {
-    String className = System.getProperty("messageClassName");
-    Class clazz = Class.forName(className);  // Noncompliant
+    ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("tcp://localhost:61616");
+    factory.setTrustAllPackages(true); // Noncompliant
     String name;
     String blog;
 }
