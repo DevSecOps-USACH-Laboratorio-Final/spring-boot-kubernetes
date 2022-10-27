@@ -19,7 +19,7 @@ import javax.crypto.Cipher;
 
 public class UserConfig {
     
-    public static void procesa() {
+    /*public static void procesa() {
     
     try
         {
@@ -28,7 +28,7 @@ public class UserConfig {
     catch(Exception e)
         {
         }
-    }
+    }*/
     
     String name;
     String blog;
