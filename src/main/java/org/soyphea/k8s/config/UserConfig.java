@@ -6,7 +6,28 @@ import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-import javax.net.ssl.SSLContext
+
+import javax.persistence.Entity;
+
+@Entity
+public class Wish {
+  Long productId;
+  Long quantity;
+  Client client;
+}
+
+@Entity
+public class Client {
+  String clientId;
+  String name;
+  String password;
+}
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+
 
 @ConfigurationProperties(prefix = "user")
 @Component
@@ -15,8 +36,15 @@ import javax.net.ssl.SSLContext
 @NoArgsConstructor
 
 public class UserConfig {
-    
-    context = SSLContext.getInstance("TLSv1.1"); // Noncompliant
+    @PostMapping(path = "/saveForLater")
+      public String saveForLater(Wish wish) {
+        session.save(wish);
+      }
+
+      @RequestMapping(path = "/saveForLater", method = RequestMethod.POST)
+      public String saveForLater(Wish wish) {
+        session.save(wish);
+      } 
    
     String name;
     String blog;
