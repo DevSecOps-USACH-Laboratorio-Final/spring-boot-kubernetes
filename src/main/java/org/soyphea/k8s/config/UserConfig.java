@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+
 @ConfigurationProperties(prefix = "user")
 @Component
 @Data
@@ -13,12 +16,7 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 
 public class UserConfig {
+    Connection conn = DriverManager.getConnection("jdbc:derby:memory:myDB;create=true", "login", "");
     String name;
     String blog;
-}
-
-@Override
-protected void configure(HttpSecurity http) throws Exception {
-   http.sessionManagement()
-     .sessionFixation().none(); // Noncompliant: the existing session will continue
 }
