@@ -20,6 +20,8 @@ import javax.crypto.Cipher;
 
 public class UserConfig {
     
+    public static void procesa() {
+    
     try
         {
             Cipher c1 = Cipher.getInstance("DES"); // Noncompliant: DES works with 56-bit keys allow attacks via exhaustive search
@@ -27,6 +29,7 @@ public class UserConfig {
     catch(Exception e)
         {
         }
+    }
     
     String name;
     String blog;
