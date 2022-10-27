@@ -66,18 +66,18 @@ stages:
       inputs:
         projectName: 'spring-boot-kubernetes'
         scanPath: '$(Build.SourcesDirectory)/target'
-        format: 'HTML'
+        format: 'JSON'
         reportsDirectory: reporte-laboratorio
     
     - script: |
-          if [ $(grep -Po '"confidence":.*?[^\\]",' $(Build.SourcesDirectory)/reporte/dependency-check-report.html | grep '"HIGH"\|"HIGHEST"' | wc -l) -gt 0 ]
+          if [ $(grep -Po '"confidence":.*?[^\\]",' $(Build.SourcesDirectory)/reporte/dependency-check-report.json | grep '"HIGH"\|"HIGHEST"' | wc -l) -gt 0 ]
           then
             echo "Se encontraron vulnerabilidades de tipo ALTA"
             exit 1
           else
             echo "No se encontraron vulnerabilidades de tipo ALTA (HIGH o HIGHEST)"
           fi
-      displayName: Script - Vulnerabilidades
+      displayName: Revisa - Vulnerabilidades
 
 - stage: DAST
   jobs:
