@@ -70,7 +70,7 @@ stages:
         reportsDirectory: reporte-laboratorio
     
     - script: |
-          if [ $(grep -Po '"confidence":.*?[^\\]",' $(Build.SourcesDirectory)/reporte/dependency-check-report.json | grep '"HIGH"\|"HIGHEST"' | wc -l) -gt 0 ]
+          if [ $(grep -oP '"confidence":.*?[^\\]",' $(Build.SourcesDirectory)/reporte-laboratorio/dependency-check-report.json | grep '"HIGH"\|"HIGHEST"' | wc -l) -gt 0 ]
           then
             echo "Se encontraron vulnerabilidades de tipo ALTA"
             exit 1
