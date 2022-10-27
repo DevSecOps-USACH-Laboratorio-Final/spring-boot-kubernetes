@@ -5,7 +5,7 @@ stages:
 - stage : SAST
   jobs:
   - job: Job
-    displayName: 'sdasds'
+    displayName: 'SonarCloud'
     steps:
     - task: Maven@4
       inputs:
@@ -45,7 +45,7 @@ stages:
 - stage : SCA
   jobs:
   - job: Job
-    displayName: 'asdsddfh'
+    displayName: 'Dependency Check'
     steps:
     - task: Maven@4
       inputs:
