@@ -25,8 +25,7 @@ public class UserConfig {
     
     try
         {
-            Cipher c1 = Cipher.getInstance("DES"); // Noncompliant: DES works with 56-bit keys allow attacks via exhaustive search
-            SecretKeySpec key = new SecretKeySpec(keyBytes, "DES");
+            Cipher c1 = Cipher.getInstance("DES/ECB/PKCS5Padding"); // Noncompliant: DES works with 56-bit keys allow attacks via exhaustive search
         }   
     catch(Exception e)
         {
