@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+import javax.net.ssl.SSLContext
+
 @ConfigurationProperties(prefix = "user")
 @Component
 @Data
@@ -14,14 +16,8 @@ import org.springframework.stereotype.Component;
 
 public class UserConfig {
     
-    SecureRandom sr = new SecureRandom();
-    sr.setSeed(123456L); // Noncompliant
-    int v = sr.next(32);
-
-    sr = new SecureRandom("abcdefghijklmnop".getBytes("us-ascii")); // Noncompliant
-    v = sr.next(32);
+    context = SSLContext.getInstance("TLSv1.1"); // Noncompliant
    
-    
     String name;
     String blog;
 }
