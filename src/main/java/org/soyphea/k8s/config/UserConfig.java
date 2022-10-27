@@ -13,7 +13,8 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 
 public class UserConfig {
-
+    String className = System.getProperty("messageClassName");
+    Class clazz = Class.forName(className);  // Noncompliant
     String name;
     String blog;
 }
