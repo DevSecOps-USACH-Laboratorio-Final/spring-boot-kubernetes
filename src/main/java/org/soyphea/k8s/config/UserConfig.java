@@ -6,8 +6,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-import java.nio.file.Files;
-
 @ConfigurationProperties(prefix = "user")
 @Component
 @Data
@@ -15,10 +13,15 @@ import java.nio.file.Files;
 @NoArgsConstructor
 
 public class UserConfig {
-    File tempDir;
-    tempDir = File.createTempFile("", ".");
-    tempDir.delete();
-    tempDir.mkdir();  // Noncompliant
+    URL url = new URL("https://example.org/");
+    HttpsURLConnection urlConnection = (HttpsURLConnection)url.openConnection();
+    urlConnection.setHostnameVerifier(new HostnameVerifier() {
+      @Override
+      public boolean verify(String requestedHost, SSLSession remoteServerSession) {
+        return true;  // Noncompliant
+      }
+    });
+    InputStream in = urlConnection.getInputStream();
    
     String name;
     String blog;
