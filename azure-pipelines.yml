@@ -68,6 +68,18 @@ stages:
         scanPath: '$(Build.SourcesDirectory)/target'
         format: 'HTML'
         reportsDirectory: reporte-laboratorio
+    
+    - script: |
+          echo "Se analiza el reporte generado en formato JSON en busca de vulnerabilidades de tipo HIGH o HIGHEST"
+          echo "Ubicación del reporte: $(Build.SourcesDirectory)/reporte-laboratorio/dependency-check-report.json"
+          if [ $(grep -Po '"confidence":.*?[^\\]",' $(Build.SourcesDirectory)/reporte/dependency-check-report.json | grep '"HIGH"\|"HIGHEST"' | wc -l) -gt 0 ]
+          then
+            echo "Atención! Se encontraron vulnerabilidades de tipo ALTA (HIGH o HIGHEST)"
+            exit 1
+          else
+            echo "OK! No se encontraron vulnerabilidades de tipo ALTA (HIGH o HIGHEST)"
+          fi
+        displayName: Script - Revisa vulnerabilidades en reporte
 
 - stage: DAST
   jobs:
