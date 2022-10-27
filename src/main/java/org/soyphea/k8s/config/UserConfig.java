@@ -6,16 +6,12 @@ import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.h2.security.SHA256;
 
-@RequestMapping(value = "/")
-public void index(HttpServletResponse res, String value) {
-    res.setHeader("Set-Cookie", value);  // Noncompliant
-    Cookie cookie = new Cookie("jsessionid", value);  // Noncompliant
-    res.addCookie(cookie);
-}
+String inputString = "s3cr37";
+byte[] key         = inputString.getBytes();
+
+SHA256.getHMAC(key, message);  // Noncompliant
 
 @ConfigurationProperties(prefix = "user")
 @Component
