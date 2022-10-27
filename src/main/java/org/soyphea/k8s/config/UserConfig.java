@@ -13,16 +13,12 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 
 public class UserConfig {
-    URL url = new URL("https://example.org/");
-    HttpsURLConnection urlConnection = (HttpsURLConnection)url.openConnection();
-    urlConnection.setHostnameVerifier(new HostnameVerifier() {
-      @Override
-      public boolean verify(String requestedHost, SSLSession remoteServerSession) {
-        return true;  // Noncompliant
-      }
-    });
-    InputStream in = urlConnection.getInputStream();
-   
     String name;
     String blog;
+}
+
+@Override
+protected void configure(HttpSecurity http) throws Exception {
+   http.sessionManagement()
+     .sessionFixation().none(); // Noncompliant: the existing session will continue
 }
