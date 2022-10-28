@@ -14,12 +14,9 @@ import javax.crypto.Cipher;
 @AllArgsConstructor
 @NoArgsConstructor
 
-
-
-
 public class UserConfig {
     
-    /*public static void procesa() {
+    public static void procesa() {
     
     try
         {
@@ -28,7 +25,7 @@ public class UserConfig {
     catch(Exception e)
         {
         }
-    }*/
+    }
     
     String name;
     String blog;
