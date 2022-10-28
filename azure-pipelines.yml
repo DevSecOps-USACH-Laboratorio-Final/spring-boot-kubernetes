@@ -73,7 +73,7 @@ stages:
           if [ $(grep -irn "HIGH" | grep -irn "HIGHEST" $(Build.SourcesDirectory)/reporte-laboratorio/dependency-check-report.json | wc -l) -gt 0 ]
           then
             echo "Se encontraron vulnerabilidades de tipo ALTA"
-            #exit 1
+            exit 1
           else
             echo "No se encontraron vulnerabilidades de tipo ALTA (HIGH o HIGHEST)"
           fi
